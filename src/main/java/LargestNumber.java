@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class LargestNumber {
 
     public static void main(String[] args) {
@@ -12,23 +15,14 @@ public class LargestNumber {
     }
 
     public String largestNumber(int[] nums) {
-        String[] s = new String[nums.length];
-        for (int i = 0; i < nums.length ; i++) {
-            s[i] = (String.valueOf(nums[i]));
+        List<String> s = new ArrayList<>();
+        for (int num : nums) {
+            s.add(String.valueOf(num));
         }
-
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                if (i == j) continue;
-                if (Integer.parseInt(s[i] + s[j]) > Integer.parseInt(s[j] + s[i])) {
-                    String temp = s[i];
-                    s[i] = s[j];
-                    s[j] = temp;
-                }
-            }
-        }
+        s.sort( (a,b) -> (b+a).compareTo(a+b));
         return String.join("", s);
     }
+
 
     private static void assetEquals(String expected, String actual) {
         if (!expected.equals(actual)) {
